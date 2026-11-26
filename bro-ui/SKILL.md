@@ -18,7 +18,7 @@ Rule numbers are stable ids. A removed rule leaves a gap.
 4. Line length 45 to 75 characters (`max-width: 65ch`). Line height 1.5 for body, 1.1 to 1.25 for headings.
 5. Nested corners: inner radius = outer radius - padding. Never inner > outer.
 6. Numbers that line up use `font-variant-numeric: tabular-nums`.
-7. Align optically. Circles and triangles overshoot their box by about 3 to 5% to look the same size as squares. A play icon shifts right to look centered.
+7. Align optically (a rule of thumb, not a law). Circles and triangles overshoot their box by about 3 to 5% to look the same size as squares. A play icon shifts right to look centered.
 
 ## Color
 
@@ -30,7 +30,7 @@ Rule numbers are stable ids. A removed rule leaves a gap.
 
 ## Interaction
 
-13. Fitts's law: time = a + b × log2(D / W + 1). Big targets close to the cursor are fast. Hit area at least 24×24px (WCAG 2.5.8), 44×44px on touch. Screen edges count as infinite width.
+13. Fitts's law: time = a + b × log2(D / W + 1). Big targets close to the cursor are fast. Hit area at least 24×24px (WCAG 2.5.8), 44×44px on touch. Targets pinned to a screen edge act as if infinitely deep, because the cursor stops there.
 14. Hick's law: time = b × log2(n + 1). Fewer choices per step. Group long lists and put a search box on anything over about 10 items.
 15. Working memory holds about 4 chunks (Cowan, 2001). Never ask people to remember something from a previous screen.
 16. Response limits (Nielsen): 100ms feels instant, 1s keeps flow, 10s loses attention. Under 100ms, show nothing. 100ms to 1s, show a state change. Over 1s, show progress.
@@ -42,7 +42,7 @@ Rule numbers are stable ids. A removed rule leaves a gap.
 
 20. Duration 100 to 300ms. Small things faster, large things slower. Exits run about 20% faster than entries.
 21. Enter with ease-out, for example `cubic-bezier(0.2, 0, 0, 1)`. Never linear for UI movement.
-22. Springs are damped oscillators with damping ratio ζ = c / (2√(k m)). Use ζ = 1 for no bounce, 0.7 to 0.85 for a small settle. Higher ζ never overshoots.
+22. Springs are damped oscillators with damping ratio ζ = c / (2√(k m)). Use ζ = 1 for no bounce, 0.7 to 0.85 for a small settle. Any ζ of 1 or more never overshoots.
 23. Animate only `transform` and `opacity`. The frame budget is 16.7ms at 60Hz and 8.3ms at 120Hz. Layout properties blow it.
 24. Respect `prefers-reduced-motion`: swap movement for a short fade.
 
