@@ -10,6 +10,28 @@ Build the UI, apply every rule below, then run the verify pass. A screen is done
 
 Rule numbers are stable ids. A removed rule leaves a gap.
 
+## How to run it
+
+1. **Recon.** Find the project's own tokens, theme file or component library first. They win over every default here. Only with no system at all, start from `examples/tokens.css`.
+2. **Build or fix** against the rules. Open the reference for a group before working in it.
+3. **Compute, don't guess.** Every number a rule asks for comes from `scripts/bro_ui.py` (standard library Python, run it with `python3`):
+   - `contrast FG BG` gives the WCAG ratio and grade.
+   - `ramp HUE --chroma C` gives an OKLCH palette with its contrast.
+   - `scale --base 16 --ratio 1.2` gives the type sizes.
+   - `spring --stiffness K --damping C` gives ζ, overshoot and settle time.
+   - `fitts D W...`, `hick N...` and `radius OUTER PADDING` cover the rest.
+4. **Verify** with `node scripts/verify.mjs URL`, then do the manual steps in `references/verify.md`. Report rules 28-34 as PASS or FAIL with numbers.
+
+| Rules | Reference |
+|---|---|
+| all formulas, worked | `references/math.md` |
+| 1-7 | `references/type-and-layout.md` |
+| 8-12 | `references/color.md` |
+| 13-19 | `references/interaction.md` |
+| 20-24 | `references/motion.md` |
+| 25-27 | `references/performance.md` |
+| 28-34 | `references/verify.md` |
+
 ## Layout and type
 
 1. Space on a 4px grid: 4, 8, 12, 16, 24, 32, 48, 64. No other values.
@@ -42,7 +64,7 @@ Rule numbers are stable ids. A removed rule leaves a gap.
 
 20. Duration 100 to 300ms. Small things faster, large things slower. Exits run about 20% faster than entries.
 21. Enter with ease-out, for example `cubic-bezier(0.2, 0, 0, 1)`. Never linear for UI movement.
-22. Springs are damped oscillators with damping ratio ζ = c / (2√(k m)). Use ζ = 1 for no bounce, 0.7 to 0.85 for a small settle. Any ζ of 1 or more never overshoots.
+22. Springs are damped oscillators with damping ratio ζ = c / (2√(k m)). Use ζ = 1 for no bounce, 0.8 to 0.9 for a slight settle (overshoot = e^(-ζπ / √(1 - ζ²)), 1.5% at 0.8). Any ζ of 1 or more never overshoots.
 23. Animate only `transform` and `opacity`. The frame budget is 16.7ms at 60Hz and 8.3ms at 120Hz. Layout properties blow it.
 24. Respect `prefers-reduced-motion`: swap movement for a short fade.
 
@@ -63,3 +85,9 @@ Run all of it. Report each item as pass or fail with the number. Fix fails and r
 32. Do a keyboard-only pass through the whole flow.
 33. Force each state from rule 18 (empty data, slow network, server error) and look at it.
 34. Measure at least one number from rule 25 with Lighthouse or the browser performance panel.
+
+## Copy
+
+35. Buttons name the action: "Save changes", not "OK" or "Submit".
+36. Errors say what went wrong and how to fix it: "Password needs 12 or more characters", not "Invalid input".
+37. Empty states say what will appear and give the first step.
