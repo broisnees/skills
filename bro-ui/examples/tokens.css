@@ -1,0 +1,92 @@
+/* bro-ui starter tokens. Use only when the project has no design system.
+   Colors come from `bro_ui.py ramp 265` (neutral chroma 0.014, accent 0.16).
+   Every text pair is measured with `bro_ui.py contrast`; ratios are in the comments. */
+
+:root {
+  /* spacing: 4px grid (rule 1) */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
+
+  /* type: 16 x 1.2^n, rounded (rule 3) */
+  --text-xs: 11px; --text-sm: 13px; --text-md: 16px; --text-lg: 19px;
+  --text-xl: 23px; --text-2xl: 28px; --text-3xl: 33px;
+  --leading-body: 1.5; --leading-tight: 1.2;
+  --measure: 65ch;
+
+  /* radius: inner = outer - padding (rule 5) */
+  --radius-lg: 12px; --radius-md: 8px; --radius-sm: 4px;
+
+  /* motion (rules 20-22) */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 300ms;
+
+  /* light theme */
+  --bg: #f9fafc;
+  --surface: #ffffff;
+  --fg: #1e2024;              /* 15.62:1 on bg */
+  --fg-muted: #5d6068;        /* 6.02:1 on bg, 6.29:1 on surface */
+  --border: #dcdfe4;          /* decorative dividers only */
+  --border-control: #8d9199;  /* 3.16:1 on surface, input and button outlines (rule 9) */
+  --accent: #4067c8;          /* 5.26:1 on surface */
+  --on-accent: #ffffff;       /* 5.26:1 on accent */
+  --danger: #c22f2f;
+  --warning: #9a6200;
+  --success: #1f7a43;
+  --focus: var(--accent);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d0d0f;
+    --surface: #1e2024;         /* elevation by lighter surface (rule 12) */
+    --fg: #f9fafc;              /* 18.59:1 on bg */
+    --fg-muted: #a6aab2;        /* 8.33:1 on bg, 7.00:1 on surface */
+    --border: #31343a;
+    --border-control: #747881;  /* 3.69:1 on surface */
+    --accent: #6994f9;          /* 6.66:1 on bg, 5.60:1 on surface */
+    --on-accent: #0d0d0f;       /* 6.66:1 on accent */
+    --danger: #ff7b72;
+    --warning: #e3b341;
+    --success: #4fc985;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d0d0f; --surface: #1e2024; --fg: #f9fafc; --fg-muted: #a6aab2;
+  --border: #31343a; --border-control: #747881; --accent: #6994f9; --on-accent: #0d0d0f;
+  --danger: #ff7b72; --warning: #e3b341; --success: #4fc985;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--text-md);
+  line-height: var(--leading-body);
+}
+
+/* visible focus for keyboard only (rule 19) */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* minimum hit area (rule 13) */
+button, [role="button"], a, input, select {
+  min-height: 24px;
+}
+@media (pointer: coarse) {
+  button, [role="button"], input, select { min-height: 44px; }
+}
+
+/* rule 24 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
